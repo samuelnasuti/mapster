@@ -39,9 +39,9 @@ module Mapster
 
 
     #Heroku precompile fix, added by Sam.  
-    config.assets.initialize_on_precompile = false
+    #config.assets.initialize_on_precompile = false
 
-    
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
