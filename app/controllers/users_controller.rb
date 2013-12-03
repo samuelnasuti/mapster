@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def index
     #@users = User.all
   if params[:search].present?
-    @users = User.near(params[:search], 12, :order => :distance)
+    @users = User.near(params[:search], 30, :order => :distance)
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
    marker.lat user.latitude
    marker.lng user.longitude
