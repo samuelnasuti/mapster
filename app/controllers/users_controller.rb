@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+
   if params[:search].present?
     @users = User.near(params[:search], params[:radius], :order => :distance)
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
@@ -33,7 +34,11 @@ class UsersController < ApplicationController
    #   format.json { render json: @users }
     end
   end
+
+   
+
 end
+
 
 
   # GET /users/1
