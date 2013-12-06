@@ -4,7 +4,8 @@
 <h1>Yum! 2013 Listings</h1>
 <%= form_tag users_path, :method => :get do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], placeholder: 'Location'%>
+    <%= number_field_tag :radius, params[:radius], placeholder: 'Search Radius' %>
     <%= submit_tag "Search Near", :name => nil %>
   </p>
 <% end %>
@@ -26,12 +27,11 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 
 <table>
   <tr>
-    <th>Latitude</th>
-    <th>Longitude</th>
-    <th>Address</th>
-    <th>Descrption</th>
     <th>Title</th>
     <th>Sales</th>
+    <th>Address</th>
+    <th>Descrption</th>
+    <th>Distance</th>
     <th></th>
     <th></th>
     <th></th>
@@ -39,15 +39,19 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.latitude %></td>
-    <td><%= user.longitude %></td>
+    <td><%= user.title %></td>
+    <td><%= number_to_human(user.sales) %></td>
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>
-    <td><%= user.title %></td>
-    <td><%= user.sales %></td>
+    <td><%= user.distance.round(1) %></td>
+ 
+<!-- 
+     
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
+
   </tr>
 <% end %>
 </table>

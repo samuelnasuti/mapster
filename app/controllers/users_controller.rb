@@ -2,9 +2,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    #@users = User.all
   if params[:search].present?
-    @users = User.near(params[:search], 30, :order => :distance)
+    @users = User.near(params[:search], params[:radius], :order => :distance)
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
    marker.lat user.latitude
    marker.lng user.longitude
@@ -12,15 +11,13 @@ class UsersController < ApplicationController
        "url" => "assets/#{user.title}.png",
        "width" =>  32,
        "height" => 32})
-   marker.infowindow "#{user.title}<br />Sales:  #{user.sales}"
- 
+   marker.infowindow "Sales: #{user.sales}"
    marker.json({ title: user.title})
-
- end
+  end
 
   else
-
-   @users = User.all
+    @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
+   #@users = User.all
    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
    marker.lat user.latitude
    marker.lng user.longitude
