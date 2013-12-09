@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
+  
+  def allofthem
+
+  @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
+
+
+  end
+
+
   def index
 
   if params[:search].present?

@@ -1,0 +1,41 @@
+
+
+
+
+
+
+
+<table class="table table-hover">
+  <tr>
+    <th>Title</th>
+    <th>Sales</th>
+    <th>Address</th>
+    <th>Descrption</th>
+    <th>Distance</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.title %></td>
+    <td><%= number_to_human(user.sales) %></td>
+    <td><%= user.address %></td>
+    <td><%= user.descrption %></td>
+    <td><%= user.distance.to_f.round(1) %></td>
+ 
+<!-- 
+     
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+-->
+
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_user_path %>
