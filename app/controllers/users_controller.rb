@@ -12,7 +12,7 @@ class UsersController < ApplicationController
        "url" => "assets/#{user.title}.png",
        "width" =>  32,
        "height" => 32})
-   marker.infowindow "Sales: #{user.sales}"
+   marker.infowindow "Sales: #{user.sales}<br />Title  #{user.title}"
    marker.json({ title: user.title})
   end
 
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
        "url" => "assets/#{user.title}.png",
        "width" =>  32,
        "height" => 32})
-   marker.infowindow "Sales  #{user.sales}<br /><br />Title  #{user.title}"
+   marker.infowindow "Sales  #{user.sales}<br />Title  #{user.title}"
  
    marker.json({ title: user.title})
    #respond_to do |format|

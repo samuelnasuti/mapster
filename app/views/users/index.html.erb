@@ -10,9 +10,9 @@
   </p>
 <% end %>
 
-<div style='width: 100%; height: 500px'>
-  <div id="map" style='width: 100%; height: 500px;'></div>
-</div>
+
+  <div id="map" style=' max-width: none; height: 500px;'></div>
+
 
 <script type="text/javascript">
 handler = Gmaps.build('Google');
@@ -43,7 +43,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     <td><%= number_to_human(user.sales) %></td>
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>
-    <td><%= user.distance.round(1) %></td>
+    <td><%= user.distance.to_f.round(1) %></td>
  
 <!-- 
      
