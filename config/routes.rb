@@ -1,7 +1,13 @@
 Mapster::Application.routes.draw do
+  
   resources :users do
-     get 'allofthem', on: :collection 
+     get 'allofthem', on: :collection
+     get 'phoneparty', on: :collection
   end
+
+ # resources :users do
+ #     get 'phoneparty', on: :collection
+ #  end
 
 root :to => 'users#index'
 end

@@ -2,12 +2,51 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   
+  def phoneparty
+    if params[:search].present?
+    @users = User.near(params[:search], params[:radius], :order => :distance)
+    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+   marker.lat user.latitude
+   marker.lng user.longitude
+     marker.picture({
+       "url" => "assets/#{user.title}.png",
+       "width" =>  32,
+       "height" => 32})
+   marker.infowindow "Sales: #{user.sales}<br />Title  #{user.title}"
+   marker.json({ title: user.title})
+  end
+
+  else
+    @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
+   #@users = User.all
+   @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+   marker.lat user.latitude
+   marker.lng user.longitude
+     marker.picture({
+       "url" => "assets/#{user.title}.png",
+       "width" =>  32,
+       "height" => 32})
+   marker.infowindow "Sales  #{user.sales}<br />Title  #{user.title}"
+ 
+   marker.json({ title: user.title})
+   #respond_to do |format|
+    # format.html # index.html.erb
+   #   format.json { render json: @users }
+    end
+
+
+  end
+end
+
+
+
   def allofthem
 
   @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
 
 
   end
+
 
 
   def index
@@ -121,3 +160,5 @@ end
     end
   end
 end
+
+
