@@ -24,12 +24,9 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   handler.getMap().setZoom(13);
 }); </script>
 
-<button onclick="handler.map.centerOn([-34.397, 150.644])">Try it</button>
+
 <table class="table table-hover">
   <tr>
-<%=raw @searcharray %>
-<%=raw User.last.title %>
-<%=raw @searchcoordinates.class %>
     <th>Title</th>
     <th>Sales</th>
     <th>Address</th>

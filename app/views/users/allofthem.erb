@@ -24,7 +24,7 @@
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.title %></td>
+    <td><%= link_to user.title, users_path(:search => user.latitude.to_s+","+user.longitude.to_s, :radius => 15), :target => '_blank' %></td>
     <td><%= user.sales %></td>
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>
