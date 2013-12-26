@@ -10,3 +10,5 @@ CSV.foreach('/app/lib/tasks/importCsv.csv',:headers => true) do |row|
     User.create!(row.to_hash)
  end
 end
+
+({latitude => 55.55, longitude =>45.55},{latitude => 55.55, longitude =>45.55},{latitude => 55.55, longitude =>45.55})

@@ -24,9 +24,12 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   handler.getMap().setZoom(13);
 }); </script>
 
-
+<button onclick="handler.map.centerOn([-34.397, 150.644])">Try it</button>
 <table class="table table-hover">
   <tr>
+<%=raw @searcharray %>
+<%=raw User.last.title %>
+<%=raw @searchcoordinates.class %>
     <th>Title</th>
     <th>Sales</th>
     <th>Address</th>
@@ -39,7 +42,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.title %></td>
+    <td><type="button" class="btn btn-default" onclick=handler.map.centerOn([<%=user.latitude %>,<%=user.longitude %>])><%= user.title %></button></td>
     <td><%= number_to_human(user.sales) %></td>
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>

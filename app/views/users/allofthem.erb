@@ -1,17 +1,22 @@
 
 
-
-
+<%= search_form_for @search, url: "/users/allofthem" do |f| %>
+  <div class="field">
+    <%= f.label :title_cont, "Title contains" %>
+    <%= f.text_field :title_cont %>
+  </div>
+  <div class="actions"><%= f.submit "Filter" %></div>
+<% end %>
 
 
 
 <table class="table table-hover">
   <tr>
-    <th>Title</th>
-    <th>Sales</th>
+    <th><%= sort_link @search, :title, "Title" %></th>
+    <th><%= sort_link @search, :sales, "Sales" %></th>
     <th>Address</th>
     <th>Descrption</th>
-    <th>Distance</th>
+ 
     <th></th>
     <th></th>
     <th></th>
@@ -20,10 +25,10 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.title %></td>
-    <td><%= number_to_human(user.sales) %></td>
+    <td><%= user.sales %></td>
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>
-    <td><%= user.distance.to_f.round(1) %></td>
+   
  
 <!-- 
      

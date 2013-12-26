@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131128204021) do
+ActiveRecord::Schema.define(:version => 20131212215359) do
 
   create_table "users", :force => true do |t|
     t.float    "latitude"
@@ -22,6 +22,10 @@ ActiveRecord::Schema.define(:version => 20131128204021) do
     t.string   "sales"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "revenue"
+    t.text     "comment"
+    t.float    "nearesttb"
+    t.integer  "priority"
   end
 
 end

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.json
   
   def phoneparty
+
     if params[:search].present?
     @users = User.near(params[:search], params[:radius], :order => :distance)
     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
@@ -34,17 +35,15 @@ class UsersController < ApplicationController
    #   format.json { render json: @users }
     end
 
-
   end
+
 end
 
-
+ 
 
   def allofthem
-
-  @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
-
-
+  @search = User.search(params[:q])
+  @users = @search.result
   end
 
 
@@ -63,6 +62,17 @@ end
    marker.infowindow "Sales: #{user.sales}<br />Title  #{user.title}"
    marker.json({ title: user.title})
   end
+
+
+
+  @searchcoordinates = Geocoder.coordinates(params[:search])
+
+
+@hash = @hash << {lat: @searchcoordinates[0], lng: @searchcoordinates[1] }
+
+  #@hash = @hash << {:lat=>39.95924, :lng=>-75.28755}
+    
+   
 
   else
     @users = User.near("14 Balligomingo Road, Conshohocken, PA", 15, :order => :distance)
