@@ -22,9 +22,32 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
   handler.getMap().setZoom(13);
+
 }); </script>
 
+<script type="text/javascript">
 
+var amsterdam=new google.maps.LatLng(0,0);
+
+function drawcircle()
+{
+
+
+var myCity = new google.maps.Circle({
+  center:amsterdam,
+  radius:100,
+  strokeColor:"#0000FF",
+  strokeOpacity:0.8,
+  strokeWeight:2,
+  fillColor:"#0000FF",
+  fillOpacity:0.4
+  });
+
+myCity.setMap(handler.getMap());
+}
+
+</script>
+<button onclick="drawcircle()">Click me</button>
 <table class="table table-hover">
   <tr>
     <th>Title</th>
@@ -32,7 +55,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     <th>Address</th>
     <th>Descrption</th>
     <th>Distance</th>
-    <th></th>
+    <th>Highlight</th>
     <th></th>
     <th></th>
   </tr>
@@ -44,6 +67,7 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     <td><%= user.address %></td>
     <td><%= user.descrption %></td>
     <td><%= user.distance.to_f.round(1) %></td>
+    <td><type="button" class="btn btn-default" onmouseover="amsterdam = new google.maps.LatLng('<%= escape_javascript user.latitude.to_s %>','<%= escape_javascript user.longitude.to_s %>'); drawcircle();">Circle It</button></td>
   <td><%= link_to 'Show', user %></td>
 
      
