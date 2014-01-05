@@ -47,26 +47,26 @@ myCity.setMap(handler.getMap());
 }
 
 </script>
-<button onclick="drawcircle()">Click me</button>
 <table class="table table-hover">
   <tr>
-    <th>Title</th>
+    <th>Brand</th>
     <th>Sales</th>
-    <th>Address</th>
-    <th>Descrption</th>
+    <th>Street</th>
+    <th>City</th>
     <th>Distance</th>
-    <th>Highlight</th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><type="button" class="btn btn-default" onclick=handler.map.centerOn([<%=user.latitude %>,<%=user.longitude %>])><%= user.title %></button></td>
-    <td><%= number_to_human(user.sales) %></td>
-    <td><%= user.address %></td>
-    <td><%= user.descrption %></td>
+    <td><type="button" class="btn btn-default" onclick=handler.map.centerOn([<%=user.latitude %>,<%=user.longitude %>])><%= user.brand %></button></td>
+    <td><%= number_to_human(user.sales_volume) %></td>
+    <td><%= user.street %></td>
+    <td><%= user.city %></td>
     <td><%= user.distance.to_f.round(1) %></td>
+
+
+<% if false %>
+
     <td><type="button" class="btn btn-default" onmouseover="amsterdam = new google.maps.LatLng('<%= escape_javascript user.latitude.to_s %>','<%= escape_javascript user.longitude.to_s %>'); drawcircle();">Circle It</button></td>
   <td><%= link_to 'Show', user %></td>
 
@@ -74,6 +74,10 @@ myCity.setMap(handler.getMap());
    
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ <% end %>   
+
+
+
     <!-- 
 -->
 

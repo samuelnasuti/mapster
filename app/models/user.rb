@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
 	include UsersHelper
-  attr_accessible :address, :descrption, :latitude, :longitude, :sales, :title, :revenue
-  geocoded_by :address
-  after_validation :geocode 
+  attr_accessible :latitude, :longitude, :sales_volume, :sales_year, :brand, :street, :city, :zip, :state, :yum_id, :closest_tb
+ geocoded_by :address
+ #after_validation :geocode, :if => :address_changed?
+
+def address
+  [street, city, state].compact.join(', ')
+end
 end
 
 

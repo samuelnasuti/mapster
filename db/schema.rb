@@ -11,21 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212215359) do
+ActiveRecord::Schema.define(:version => 20140103203520) do
 
   create_table "users", :force => true do |t|
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "address"
-    t.text     "descrption"
-    t.string   "title"
-    t.string   "sales"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "revenue"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.text     "comment"
     t.float    "nearesttb"
     t.integer  "priority"
+    t.string   "yum_id"
+    t.integer  "sales_volume"
+    t.string   "street"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "sales_year"
+    t.string   "state"
+    t.float    "closest_tb"
+    t.string   "brand"
+    t.string   "address"
   end
 
 end
