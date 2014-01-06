@@ -2,9 +2,16 @@
 
 <%= search_form_for @search, url: "/users/allofthem" do |f| %>
   <div class="field">
-    <%= f.label :title_cont, "Title contains" %>
-    <%= f.text_field :title_cont %>
+    <%= f.label :brand_cont, "Brand contains" %>
+    <%= f.text_field :brand_cont %>
   </div>
+
+  <div class="field">
+    <%= f.label :closest_tb_gteq, "Minimum TB Distance" %>
+    <%= f.text_field :closest_tb_gteq %>
+  </div>
+
+
   <div class="actions"><%= f.submit "Filter" %></div>
 <% end %>
 
@@ -12,22 +19,23 @@
 
 <table class="table table-hover">
   <tr>
-    <th><%= sort_link @search, :title, "Title" %></th>
-    <th><%= sort_link @search, :sales, "Sales" %></th>
+    <th><%= sort_link @search, :brand, "Brand" %></th>
+    <th><%= sort_link @search, :sales_volume, "Sales" %></th>
     <th>Address</th>
-    <th>Descrption</th>
- 
-    <th></th>
+    <th>Sales Yr.</th>
+    <th>Nearest TB</th>
     <th></th>
     <th></th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= link_to user.title, users_path(:search => user.latitude.to_s+","+user.longitude.to_s, :radius => 15), :target => '_blank' %></td>
-    <td><%= user.sales %></td>
+    <td><%= link_to user.brand, users_path(:search => user.latitude.to_s+","+user.longitude.to_s, :radius => 15), :target => '_blank' %></td>
+    <td><%= number_to_human(user.sales_volume) %></td>
+    <td><%= user.sales_year %></td>
     <td><%= user.address %></td>
-    <td><%= user.descrption %></td>
+    <td><%= number_to_human(user.closest_tb) %></td>
+    
    
  
 <!-- 

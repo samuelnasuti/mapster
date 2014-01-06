@@ -2,7 +2,7 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
 
-<%= form_tag users_path, :method => :get do %>
+<%= form_tag users_path + "/tbsearch", :method => :get do %>
   <p>
     <%= text_field_tag :search, params[:search], placeholder: 'Location'%>
     <%= number_field_tag :radius, params[:radius], placeholder: 'Search Radius' %>
@@ -50,23 +50,36 @@ myCity.setMap(handler.getMap());
 <table class="table table-hover">
   <tr>
     <th>Brand</th>
+    <th>Store</th>
+    <th>#</th>
     <th>Sales</th>
-    <th>Sales Yr.</th>
+    <th>Franchisee</th>
+    <th>Franchise Exp.</th>
+    <th>Next Lease Exp.</th>
+    <th>Final Lease Exp.</th>
+    <th>RE Owner</th>
     <th>Address</th>
     <th>Distance</th>
-    <th>Nearest TB</th>
-    <th>Store #</th>
+    
+   
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><type="button" class="btn btn-default" onclick=handler.map.centerOn([<%=user.latitude %>,<%=user.longitude %>])><%= user.brand %></button></td>
-    <td><%= number_to_human(user.sales_volume) %></td>
-    <td><%= user.sales_year %></td>
+    <td><%= user.name %></td>
+    <td><%= user.store_number %></td>
+     <td><%= number_to_human(user.sales_volume) %></td>
+    <td><%= user.franchisee %></td>
+      <td><%= user.franchise_exp %></td>
+        <td><%= user.lease_exp_next %></td>
+        <td><%= user.lease_exp_final %></td>
+        <td><%= user.re_owner %></td>
+   
     <td><%= user.address %></td>
     <td><%= user.distance.to_f.round(1) %></td>
-    <td><%= user.closest_tb.to_f.round(1) %></td>
-    <td><%= user.store_number %></td>
+
+
 <% if false %>
 
     <td><type="button" class="btn btn-default" onmouseover="amsterdam = new google.maps.LatLng('<%= escape_javascript user.latitude.to_s %>','<%= escape_javascript user.longitude.to_s %>'); drawcircle();">Circle It</button></td>
@@ -80,8 +93,6 @@ myCity.setMap(handler.getMap());
 
 
 
-    <!-- 
--->
 
   </tr>
 <% end %>

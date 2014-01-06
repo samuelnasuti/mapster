@@ -3,6 +3,7 @@ Mapster::Application.routes.draw do
   resources :users do
      get 'allofthem', on: :collection
      get 'phoneparty', on: :collection
+     get 'tbsearch', on: :collection
   end
 
  # resources :users do

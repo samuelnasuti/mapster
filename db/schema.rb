@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140103203520) do
+ActiveRecord::Schema.define(:version => 20140105230538) do
 
   create_table "users", :force => true do |t|
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.text     "comment"
     t.float    "nearesttb"
     t.integer  "priority"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20140103203520) do
     t.float    "closest_tb"
     t.string   "brand"
     t.string   "address"
+    t.string   "franchisee"
+    t.string   "store_number"
+    t.string   "franchise_exp"
+    t.string   "lease_exp_final"
+    t.string   "lease_exp_next"
+    t.string   "name"
+    t.string   "re_owner"
   end
 
 end

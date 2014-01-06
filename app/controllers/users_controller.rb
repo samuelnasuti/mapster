@@ -47,7 +47,7 @@ class UsersController < ApplicationController
    
 
   else
-    @users = User.all
+    @users = User.near("14 Balligomingo Road, Conshocken, PA", 15, :order => :distance)
    #@users = User.all
    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
    marker.lat user.latitude
@@ -141,6 +141,59 @@ end
       format.json { head :no_content }
     end
   end
+
+  def tbsearch
+
+    if params[:search].present?
+        @nearbys = User.near(params[:search], params[:radius], :order => :distance)
+   @users = @nearbys.where(:brand => ["TBC", "KT", "TP", "TL"])
+    @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+   marker.lat user.latitude
+   marker.lng user.longitude
+     marker.picture({
+       "url" => "../assets/#{user.brand}.png",
+       "width" =>  32,
+       "height" => 32})
+   marker.infowindow "#{user.brand}:#{user.sales_volume} - #{user.sales_year}"
+   marker.json({ brand: user.brand})
+  end
+
+
+
+  @searchcoordinates = Geocoder.coordinates(params[:search])
+
+
+@hash = @hash << {lat: @searchcoordinates[0], lng: @searchcoordinates[1]}
+
+  #@hash = @hash << {:lat=>39.95924, :lng=>-75.28755}
+    
+   
+
+  else
+    @nearbys = User.near("King of Prussia, PA", 15, :order => :distance)
+    @users = @nearbys.where(:brand => ["TBC", "KT", "TP", "TL"])
+   #@users = User.all
+   @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+   marker.lat user.latitude
+   marker.lng user.longitude
+     marker.picture({
+       "url" => "../assets/#{user.brand}.png",
+       "width" =>  32,
+       "height" => 32})
+  marker.infowindow "#{user.brand}:#{user.sales_volume} - #{user.sales_year}"
+ 
+   marker.json({ brand: user.brand})
+   #respond_to do |format|
+    # format.html # index.html.erb
+   #   format.json { render json: @users }
+    end
+  end
+
+   
+
+end
+
+
 end
 
 
